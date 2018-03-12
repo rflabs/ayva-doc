@@ -2,13 +2,23 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Introduction\n\n\nAyva\n is an open-source cross-platform developer framework used to build voice assistant apps. The features and tools provided in this framework are platform agnostic, allowing developers to build once and deploy on both Google Assistant and Alexa.\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
-            "title": "Home"
+            "text": "Introduction\n\n\nAyva\n is an open-source cross-platform developer framework used to build voice assistant apps. The features and tools provided in this framework are platform agnostic, allowing developers to build once and deploy on both Google Assistant and Alexa.\n\n\nThe voice application lifecycle\n\n\nWhy did we build Ayva\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "title": "Introduction"
         }, 
         {
             "location": "/#introduction", 
             "text": "Ayva  is an open-source cross-platform developer framework used to build voice assistant apps. The features and tools provided in this framework are platform agnostic, allowing developers to build once and deploy on both Google Assistant and Alexa.", 
             "title": "Introduction"
+        }, 
+        {
+            "location": "/#the-voice-application-lifecycle", 
+            "text": "", 
+            "title": "The voice application lifecycle"
+        }, 
+        {
+            "location": "/#why-did-we-build-ayva", 
+            "text": "", 
+            "title": "Why did we build Ayva"
         }, 
         {
             "location": "/#commands", 
@@ -21,9 +31,59 @@
             "title": "Project layout"
         }, 
         {
-            "location": "/about/", 
+            "location": "/interactionModel/", 
+            "text": "Intent\n\n\nUtterance\n\n\nSlot\n\n\nBuilt-in Entity\n\n\nDialogflow\n\n\nAlexa\n\n\nCustom Entity", 
+            "title": "Interaction Model"
+        }, 
+        {
+            "location": "/interactionModel/#intent", 
             "text": "", 
-            "title": "About"
+            "title": "Intent"
+        }, 
+        {
+            "location": "/interactionModel/#utterance", 
+            "text": "", 
+            "title": "Utterance"
+        }, 
+        {
+            "location": "/interactionModel/#slot", 
+            "text": "", 
+            "title": "Slot"
+        }, 
+        {
+            "location": "/interactionModel/#built-in-entity", 
+            "text": "", 
+            "title": "Built-in Entity"
+        }, 
+        {
+            "location": "/interactionModel/#dialogflow", 
+            "text": "", 
+            "title": "Dialogflow"
+        }, 
+        {
+            "location": "/interactionModel/#alexa", 
+            "text": "", 
+            "title": "Alexa"
+        }, 
+        {
+            "location": "/interactionModel/#custom-entity", 
+            "text": "", 
+            "title": "Custom Entity"
+        }, 
+        {
+            "location": "/ayvaCLI/", 
+            "text": "CLI Commmand Reference", 
+            "title": "Ayva CLI"
+        }, 
+        {
+            "location": "/ayvaCLI/#cli-commmand-reference", 
+            "text": "", 
+            "title": "CLI Commmand Reference"
+        }, 
+        {
+            "location": "/ayvaLibrary/", 
+            "text": "", 
+            "title": "Ayva Library"
         }
     ]
 }
