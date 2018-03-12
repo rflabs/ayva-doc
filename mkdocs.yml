@@ -1,5 +1,7 @@
 site_name: Ayva Documentaiton
 pages:
-    - Home: index.md
-    - About: about.md
+    - Introduction: index.md
+    - Interaction Model: interactionModel.md
+    - Ayva CLI: ayvaCLI.md
+    - Ayva Library: ayvaLibrary.md
 theme: readthedocs
