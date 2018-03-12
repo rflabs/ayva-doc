@@ -56,7 +56,7 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#the-voice-application-lifecycle">The voice application lifecycle</a></li>
+            <li><a class="toctree-l3" href="#the-voice-application-lifecycle">The Voice Application Lifecycle</a></li>
         
             <li><a class="toctree-l3" href="#why-did-we-build-ayva">Why did we build Ayva</a></li>
         
@@ -119,8 +119,26 @@
               
                 <h1 id="introduction">Introduction</h1>
 <p><a href="https://www.refreshlabs.co/ayva">Ayva</a> is an open-source cross-platform developer framework used to build voice assistant apps. The features and tools provided in this framework are platform agnostic, allowing developers to build once and deploy on both Google Assistant and Alexa.</p>
-<h2 id="the-voice-application-lifecycle">The voice application lifecycle</h2>
+<h2 id="the-voice-application-lifecycle">The Voice Application Lifecycle</h2>
+<ul>
+<li>A user speaks to a device, like an Alexa or Google Assistant</li>
+<li>The user's voice is converted into text using a speech-to-text</li>
+<li>The text is evaluated against a developer configured <strong>Interaction Model</strong> by the Natural Languague Understanding (NLU) provider (ie. Alexa, Google, etc.).</li>
+<li>The NLU provider extracts the user's <strong>intent</strong></li>
+<li>...and possibly some additional input in the form of custom <strong>slots</strong></li>
+<li>The intent and any additional parameters are passed to the voice application's Intent Execution execution logic. </li>
+<li>This is usually through an https webhook request (or direct execution in the case of a serverless architecture)</li>
+<li>The voice application's intent logic is executed with the supplied arguments</li>
+<li>A response is  returned in SSML (Speech Synthesis Markup Language) format, which allows the device to speak the response to the user
+The execution of the intent is largely determined by the specific application being built, but there are a number of common challenges when building voice applications.</li>
+</ul>
 <h2 id="why-did-we-build-ayva">Why did we build Ayva</h2>
+<ul>
+<li>NLU providers need the speech model of the application, but do not provide tools for versioning or sharing between developers. When you build on Ayva, your Speech Model is tracked by your version control system.</li>
+<li></li>
+<li>Every intent provider (platforms like Alexa and Dialogflow for Google) has a different input format that makes it difficult to manage intent fulfillment from a single codebase</li>
+<li>SSML is unfamiliar to most developers, and does not have tools to keep code clean and accessible.</li>
+</ul>
 <h2 id="commands">Commands</h2>
 <ul>
 <li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
@@ -183,5 +201,5 @@ docs/
 
 <!--
 MkDocs version : 0.17.3
-Build Date UTC : 2018-03-12 03:35:29
+Build Date UTC : 2018-03-12 14:15:51
 -->

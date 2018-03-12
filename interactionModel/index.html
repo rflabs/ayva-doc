@@ -59,11 +59,23 @@
             
     <li class="toctree-l2"><a href="#intent">Intent</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l3" href="#intent-field-descriptions">Intent Field Descriptions</a></li>
+        
+        </ul>
+    
 
     <li class="toctree-l2"><a href="#utterance">Utterance</a></li>
     
 
     <li class="toctree-l2"><a href="#slot">Slot</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#slot-field-descriptions">Slot Field Descriptions</a></li>
+        
+        </ul>
     
 
     <li class="toctree-l2"><a href="#built-in-entity">Built-in Entity</a></li>
@@ -78,6 +90,18 @@
     
 
     <li class="toctree-l2"><a href="#custom-entity">Custom Entity</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#list-entity">List Entity</a></li>
+        
+            <li><a class="toctree-l3" href="#list-entity-field-descriptions">List Entity Field Descriptions</a></li>
+        
+            <li><a class="toctree-l3" href="#complex-entity">Complex Entity</a></li>
+        
+            <li><a class="toctree-l3" href="#complex-entity-field-descriptions">Complex Entity Field Descriptions</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -126,12 +150,91 @@
             <div class="section">
               
                 <h2 id="intent">Intent</h2>
+<pre><code>{
+    name: string,
+    utterances: [string],
+    slots: [slot]
+    events: [string]
+}
+</code></pre>
+
+<h3 id="intent-field-descriptions">Intent Field Descriptions</h3>
+<p><strong>name</strong> (string, required, cross-platform): The name of the intent, spelled as it is in the Ayva Registration (see: Configuring your application)</p>
+<p><strong>utterances</strong> ([string], optional, cross-platform): Sample phrases that trigger this intent. Optional if one or more events are included. Utterances that contain slots should be formatted according to Utterance-Format-for-Slots_su7YS</p>
+<p><strong>slots</strong> (Slot Reference, optional, cross-platform): Specifies custom slots used by an intent. See </p>
+<p><strong>events</strong> ([string, optional, Dialogflow) : Reference to Dialogflow events, like the default Welcome event triggered on application invocation.</p>
 <h2 id="utterance">Utterance</h2>
 <h2 id="slot">Slot</h2>
+<p><em>Note: The slot model is an object whose keys are the names of slots referenced in the intent.</em></p>
+<pre><code>{
+    slot_name : {
+        dataType: string,
+        isList: boolean,
+        required: boolean
+    }
+    ...
+}
+</code></pre>
+
+<h3 id="slot-field-descriptions">Slot Field Descriptions</h3>
+<p><strong>slot_name</strong> (string, required, cross-platform): The name of the slot. See also, Formatting Utterances With Slots</p>
+<p><strong>dataType</strong> (string, required, cross platform): The entity type of the slot. Entities may be either predefined entity types (see Built in Entity Reference) or custom (see Custom Entity Reference) </p>
+<p><strong>isList</strong> (boolean, optional, Dialogflow): Dialogflow allows for slots to contain a list of items. Specifying this field allows Ayva to configure this option in Dialogflow. Defaults to false. Note that list slots fulfilled by Dialogflow will be provided as arrays of values. Other platforms that do not support this feature will provide single values.</p>
+<p><strong>required</strong> (boolean, optional, cross-platform): </p>
 <h2 id="built-in-entity">Built-in Entity</h2>
 <h4 id="dialogflow">Dialogflow</h4>
 <h4 id="alexa">Alexa</h4>
 <h2 id="custom-entity">Custom Entity</h2>
+<p>If your intent requires input that is custom to your application, you can create custom entity types and provide sample input. There are two formats for custom entity types</p>
+<h3 id="list-entity">List Entity</h3>
+<pre><code>{
+    name: string,
+    values: [string]
+}
+</code></pre>
+
+<p>For example, a custom entity to describe house pets might look like:</p>
+<pre><code>{
+    name: &quot;HousePets&quot;, 
+    values: [&quot;dog&quot;, &quot;cat&quot;, &quot;lizard&quot;]
+}
+</code></pre>
+
+<h3 id="list-entity-field-descriptions">List Entity Field Descriptions</h3>
+<p><strong>name</strong> (string, required, cross-platform) : The name of the Entity type
+<strong>values</strong> ([string], required, cross-platform): Sample values for the Entity.
+ <em>Note that this list may be expanded automatically by the NLU provider.</em></p>
+<h3 id="complex-entity">Complex Entity</h3>
+<pre><code>{
+    name: string,
+    values: [{
+        name: string,
+        synonyms: [string]
+    }]
+}
+</code></pre>
+
+<p>For example, a custom entity to describe sports might look like:</p>
+<pre><code>{
+    name: &quot;Sports&quot;,
+    values: [
+        {
+            name: 'Basketball',
+            synonyms: ['hoops', 'baskets']
+        },
+        {
+            name: 'Football',
+            synonyms: ['American football', 'gridiron football']
+        }
+    ]
+}
+</code></pre>
+
+<h3 id="complex-entity-field-descriptions">Complex Entity Field Descriptions</h3>
+<p><strong>name</strong> (string, required, cross-platform) : The name of the Entity type
+<strong>values</strong> ([object], required): 
+    <strong>name</strong> (string, required, cross-platform): A value of the entity.
+    <strong>synonyms</strong> ([string], optional, cross-platform) : A list of synonyms that will match the value</p>
               
             </div>
           </div>

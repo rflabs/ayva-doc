@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Introduction\n\n\nAyva\n is an open-source cross-platform developer framework used to build voice assistant apps. The features and tools provided in this framework are platform agnostic, allowing developers to build once and deploy on both Google Assistant and Alexa.\n\n\nThe voice application lifecycle\n\n\nWhy did we build Ayva\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "text": "Introduction\n\n\nAyva\n is an open-source cross-platform developer framework used to build voice assistant apps. The features and tools provided in this framework are platform agnostic, allowing developers to build once and deploy on both Google Assistant and Alexa.\n\n\nThe Voice Application Lifecycle\n\n\n\n\nA user speaks to a device, like an Alexa or Google Assistant\n\n\nThe user's voice is converted into text using a speech-to-text\n\n\nThe text is evaluated against a developer configured \nInteraction Model\n by the Natural Languague Understanding (NLU) provider (ie. Alexa, Google, etc.).\n\n\nThe NLU provider extracts the user's \nintent\n\n\n...and possibly some additional input in the form of custom \nslots\n\n\nThe intent and any additional parameters are passed to the voice application's Intent Execution execution logic. \n\n\nThis is usually through an https webhook request (or direct execution in the case of a serverless architecture)\n\n\nThe voice application's intent logic is executed with the supplied arguments\n\n\nA response is  returned in SSML (Speech Synthesis Markup Language) format, which allows the device to speak the response to the user\nThe execution of the intent is largely determined by the specific application being built, but there are a number of common challenges when building voice applications.\n\n\n\n\nWhy did we build Ayva\n\n\n\n\nNLU providers need the speech model of the application, but do not provide tools for versioning or sharing between developers. When you build on Ayva, your Speech Model is tracked by your version control system.\n\n\n\n\nEvery intent provider (platforms like Alexa and Dialogflow for Google) has a different input format that makes it difficult to manage intent fulfillment from a single codebase\n\n\nSSML is unfamiliar to most developers, and does not have tools to keep code clean and accessible.\n\n\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
             "title": "Introduction"
         }, 
         {
@@ -12,12 +12,12 @@
         }, 
         {
             "location": "/#the-voice-application-lifecycle", 
-            "text": "", 
-            "title": "The voice application lifecycle"
+            "text": "A user speaks to a device, like an Alexa or Google Assistant  The user's voice is converted into text using a speech-to-text  The text is evaluated against a developer configured  Interaction Model  by the Natural Languague Understanding (NLU) provider (ie. Alexa, Google, etc.).  The NLU provider extracts the user's  intent  ...and possibly some additional input in the form of custom  slots  The intent and any additional parameters are passed to the voice application's Intent Execution execution logic.   This is usually through an https webhook request (or direct execution in the case of a serverless architecture)  The voice application's intent logic is executed with the supplied arguments  A response is  returned in SSML (Speech Synthesis Markup Language) format, which allows the device to speak the response to the user\nThe execution of the intent is largely determined by the specific application being built, but there are a number of common challenges when building voice applications.", 
+            "title": "The Voice Application Lifecycle"
         }, 
         {
             "location": "/#why-did-we-build-ayva", 
-            "text": "", 
+            "text": "NLU providers need the speech model of the application, but do not provide tools for versioning or sharing between developers. When you build on Ayva, your Speech Model is tracked by your version control system.   Every intent provider (platforms like Alexa and Dialogflow for Google) has a different input format that makes it difficult to manage intent fulfillment from a single codebase  SSML is unfamiliar to most developers, and does not have tools to keep code clean and accessible.", 
             "title": "Why did we build Ayva"
         }, 
         {
@@ -32,13 +32,18 @@
         }, 
         {
             "location": "/interactionModel/", 
-            "text": "Intent\n\n\nUtterance\n\n\nSlot\n\n\nBuilt-in Entity\n\n\nDialogflow\n\n\nAlexa\n\n\nCustom Entity", 
+            "text": "Intent\n\n\n{\n    name: string,\n    utterances: [string],\n    slots: [slot]\n    events: [string]\n}\n\n\n\n\nIntent Field Descriptions\n\n\nname\n (string, required, cross-platform): The name of the intent, spelled as it is in the Ayva Registration (see: Configuring your application)\n\n\nutterances\n ([string], optional, cross-platform): Sample phrases that trigger this intent. Optional if one or more events are included. Utterances that contain slots should be formatted according to Utterance-Format-for-Slots_su7YS\n\n\nslots\n (Slot Reference, optional, cross-platform): Specifies custom slots used by an intent. See \n\n\nevents\n ([string, optional, Dialogflow) : Reference to Dialogflow events, like the default Welcome event triggered on application invocation.\n\n\nUtterance\n\n\nSlot\n\n\nNote: The slot model is an object whose keys are the names of slots referenced in the intent.\n\n\n{\n    slot_name : {\n        dataType: string,\n        isList: boolean,\n        required: boolean\n    }\n    ...\n}\n\n\n\n\nSlot Field Descriptions\n\n\nslot_name\n (string, required, cross-platform): The name of the slot. See also, Formatting Utterances With Slots\n\n\ndataType\n (string, required, cross platform): The entity type of the slot. Entities may be either predefined entity types (see Built in Entity Reference) or custom (see Custom Entity Reference) \n\n\nisList\n (boolean, optional, Dialogflow): Dialogflow allows for slots to contain a list of items. Specifying this field allows Ayva to configure this option in Dialogflow. Defaults to false. Note that list slots fulfilled by Dialogflow will be provided as arrays of values. Other platforms that do not support this feature will provide single values.\n\n\nrequired\n (boolean, optional, cross-platform): \n\n\nBuilt-in Entity\n\n\nDialogflow\n\n\nAlexa\n\n\nCustom Entity\n\n\nIf your intent requires input that is custom to your application, you can create custom entity types and provide sample input. There are two formats for custom entity types\n\n\nList Entity\n\n\n{\n    name: string,\n    values: [string]\n}\n\n\n\n\nFor example, a custom entity to describe house pets might look like:\n\n\n{\n    name: \nHousePets\n, \n    values: [\ndog\n, \ncat\n, \nlizard\n]\n}\n\n\n\n\nList Entity Field Descriptions\n\n\nname\n (string, required, cross-platform) : The name of the Entity type\n\nvalues\n ([string], required, cross-platform): Sample values for the Entity.\n \nNote that this list may be expanded automatically by the NLU provider.\n\n\nComplex Entity\n\n\n{\n    name: string,\n    values: [{\n        name: string,\n        synonyms: [string]\n    }]\n}\n\n\n\n\nFor example, a custom entity to describe sports might look like:\n\n\n{\n    name: \nSports\n,\n    values: [\n        {\n            name: 'Basketball',\n            synonyms: ['hoops', 'baskets']\n        },\n        {\n            name: 'Football',\n            synonyms: ['American football', 'gridiron football']\n        }\n    ]\n}\n\n\n\n\nComplex Entity Field Descriptions\n\n\nname\n (string, required, cross-platform) : The name of the Entity type\n\nvalues\n ([object], required): \n    \nname\n (string, required, cross-platform): A value of the entity.\n    \nsynonyms\n ([string], optional, cross-platform) : A list of synonyms that will match the value", 
             "title": "Interaction Model"
         }, 
         {
             "location": "/interactionModel/#intent", 
-            "text": "", 
+            "text": "{\n    name: string,\n    utterances: [string],\n    slots: [slot]\n    events: [string]\n}", 
             "title": "Intent"
+        }, 
+        {
+            "location": "/interactionModel/#intent-field-descriptions", 
+            "text": "name  (string, required, cross-platform): The name of the intent, spelled as it is in the Ayva Registration (see: Configuring your application)  utterances  ([string], optional, cross-platform): Sample phrases that trigger this intent. Optional if one or more events are included. Utterances that contain slots should be formatted according to Utterance-Format-for-Slots_su7YS  slots  (Slot Reference, optional, cross-platform): Specifies custom slots used by an intent. See   events  ([string, optional, Dialogflow) : Reference to Dialogflow events, like the default Welcome event triggered on application invocation.", 
+            "title": "Intent Field Descriptions"
         }, 
         {
             "location": "/interactionModel/#utterance", 
@@ -47,8 +52,13 @@
         }, 
         {
             "location": "/interactionModel/#slot", 
-            "text": "", 
+            "text": "Note: The slot model is an object whose keys are the names of slots referenced in the intent.  {\n    slot_name : {\n        dataType: string,\n        isList: boolean,\n        required: boolean\n    }\n    ...\n}", 
             "title": "Slot"
+        }, 
+        {
+            "location": "/interactionModel/#slot-field-descriptions", 
+            "text": "slot_name  (string, required, cross-platform): The name of the slot. See also, Formatting Utterances With Slots  dataType  (string, required, cross platform): The entity type of the slot. Entities may be either predefined entity types (see Built in Entity Reference) or custom (see Custom Entity Reference)   isList  (boolean, optional, Dialogflow): Dialogflow allows for slots to contain a list of items. Specifying this field allows Ayva to configure this option in Dialogflow. Defaults to false. Note that list slots fulfilled by Dialogflow will be provided as arrays of values. Other platforms that do not support this feature will provide single values.  required  (boolean, optional, cross-platform):", 
+            "title": "Slot Field Descriptions"
         }, 
         {
             "location": "/interactionModel/#built-in-entity", 
@@ -67,18 +77,48 @@
         }, 
         {
             "location": "/interactionModel/#custom-entity", 
-            "text": "", 
+            "text": "If your intent requires input that is custom to your application, you can create custom entity types and provide sample input. There are two formats for custom entity types", 
             "title": "Custom Entity"
         }, 
         {
+            "location": "/interactionModel/#list-entity", 
+            "text": "{\n    name: string,\n    values: [string]\n}  For example, a custom entity to describe house pets might look like:  {\n    name:  HousePets , \n    values: [ dog ,  cat ,  lizard ]\n}", 
+            "title": "List Entity"
+        }, 
+        {
+            "location": "/interactionModel/#list-entity-field-descriptions", 
+            "text": "name  (string, required, cross-platform) : The name of the Entity type values  ([string], required, cross-platform): Sample values for the Entity.\n  Note that this list may be expanded automatically by the NLU provider.", 
+            "title": "List Entity Field Descriptions"
+        }, 
+        {
+            "location": "/interactionModel/#complex-entity", 
+            "text": "{\n    name: string,\n    values: [{\n        name: string,\n        synonyms: [string]\n    }]\n}  For example, a custom entity to describe sports might look like:  {\n    name:  Sports ,\n    values: [\n        {\n            name: 'Basketball',\n            synonyms: ['hoops', 'baskets']\n        },\n        {\n            name: 'Football',\n            synonyms: ['American football', 'gridiron football']\n        }\n    ]\n}", 
+            "title": "Complex Entity"
+        }, 
+        {
+            "location": "/interactionModel/#complex-entity-field-descriptions", 
+            "text": "name  (string, required, cross-platform) : The name of the Entity type values  ([object], required): \n     name  (string, required, cross-platform): A value of the entity.\n     synonyms  ([string], optional, cross-platform) : A list of synonyms that will match the value", 
+            "title": "Complex Entity Field Descriptions"
+        }, 
+        {
             "location": "/ayvaCLI/", 
-            "text": "CLI Commmand Reference", 
+            "text": "CLI Commmand Reference\n\n\nOverview\n\n\nThe Ayva CLI is a tool to help with cross platform development and deployment tasks when building an application on the Ayva Framework using Nodejs.\n\n\nCommand Descriptions\n\n\nNote: Commands should be run in the same directory as your project's ayva.json file, or you can supply an optional path parameter to direct the CLI to the project's ayva.json file.\n\n\n\n\nayva hello [path]\n- Clones and initializes the Ayva Hello World project. Built to be used alongside the Ayva Hello World Tutorial. Takes an optional path argument to clone into a specific directory.\n\n\nayva create [path]\n - Creates a skeleton Ayva application. Takes a required path argument, which is used as the default name of the project.\n\n\nayva deploy [path] [-d | \u30fcdialogflow] [-a | \u30fcalexa]\n - Command to upload local Ayva Speech Model to voice platforms. By default, the command will attempt to upload to any platforms configured by the project, as definied in the ayva.json configuration file. This can be overridden by specifying a particular platform using \n--dialogflow\n for DialogflowV1 and \n--alexa\n for Alexa. Takes an optional path argument to your ayva.json directory.\n\n\nayva init [path]\n - Creates the required Ayva config files - ayva.json and speechModel.js - in the current directory, or directory supplied by the optional path argument. This command will also configure a new NLU provider (like Alexa and Google) in an existing project.", 
             "title": "Ayva CLI"
         }, 
         {
             "location": "/ayvaCLI/#cli-commmand-reference", 
             "text": "", 
             "title": "CLI Commmand Reference"
+        }, 
+        {
+            "location": "/ayvaCLI/#overview", 
+            "text": "The Ayva CLI is a tool to help with cross platform development and deployment tasks when building an application on the Ayva Framework using Nodejs.", 
+            "title": "Overview"
+        }, 
+        {
+            "location": "/ayvaCLI/#command-descriptions", 
+            "text": "Note: Commands should be run in the same directory as your project's ayva.json file, or you can supply an optional path parameter to direct the CLI to the project's ayva.json file.   ayva hello [path] - Clones and initializes the Ayva Hello World project. Built to be used alongside the Ayva Hello World Tutorial. Takes an optional path argument to clone into a specific directory.  ayva create [path]  - Creates a skeleton Ayva application. Takes a required path argument, which is used as the default name of the project.  ayva deploy [path] [-d | \u30fcdialogflow] [-a | \u30fcalexa]  - Command to upload local Ayva Speech Model to voice platforms. By default, the command will attempt to upload to any platforms configured by the project, as definied in the ayva.json configuration file. This can be overridden by specifying a particular platform using  --dialogflow  for DialogflowV1 and  --alexa  for Alexa. Takes an optional path argument to your ayva.json directory.  ayva init [path]  - Creates the required Ayva config files - ayva.json and speechModel.js - in the current directory, or directory supplied by the optional path argument. This command will also configure a new NLU provider (like Alexa and Google) in an existing project.", 
+            "title": "Command Descriptions"
         }, 
         {
             "location": "/ayvaLibrary/", 

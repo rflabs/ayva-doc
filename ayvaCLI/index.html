@@ -64,6 +64,14 @@
             
     <li class="toctree-l2"><a href="#cli-commmand-reference">CLI Commmand Reference</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l3" href="#overview">Overview</a></li>
+        
+            <li><a class="toctree-l3" href="#command-descriptions">Command Descriptions</a></li>
+        
+        </ul>
+    
 
     </ul>
 	    </li>
@@ -106,6 +114,16 @@
             <div class="section">
               
                 <h2 id="cli-commmand-reference">CLI Commmand Reference</h2>
+<h3 id="overview">Overview</h3>
+<p>The Ayva CLI is a tool to help with cross platform development and deployment tasks when building an application on the Ayva Framework using Nodejs.</p>
+<h3 id="command-descriptions">Command Descriptions</h3>
+<p>Note: Commands should be run in the same directory as your project's ayva.json file, or you can supply an optional path parameter to direct the CLI to the project's ayva.json file.</p>
+<ul>
+<li><code>ayva hello [path]</code>- Clones and initializes the Ayva Hello World project. Built to be used alongside the Ayva Hello World Tutorial. Takes an optional path argument to clone into a specific directory.</li>
+<li><code>ayva create [path]</code> - Creates a skeleton Ayva application. Takes a required path argument, which is used as the default name of the project.</li>
+<li><code>ayva deploy [path] [-d | ーdialogflow] [-a | ーalexa]</code> - Command to upload local Ayva Speech Model to voice platforms. By default, the command will attempt to upload to any platforms configured by the project, as definied in the ayva.json configuration file. This can be overridden by specifying a particular platform using <code>--dialogflow</code> for DialogflowV1 and <code>--alexa</code> for Alexa. Takes an optional path argument to your ayva.json directory.</li>
+<li><code>ayva init [path]</code> - Creates the required Ayva config files - ayva.json and speechModel.js - in the current directory, or directory supplied by the optional path argument. This command will also configure a new NLU provider (like Alexa and Google) in an existing project.</li>
+</ul>
               
             </div>
           </div>
